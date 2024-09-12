@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const SignUpPage = () => {
     const {
@@ -25,9 +26,14 @@ const SignUpPage = () => {
         axios.post("http://localhost:3000/auth/register", payload)
             .then(res => {
                 console.log(res.data)
+
+                if (res.data?.message) {
+                    toast.success(res.data.message)
+                }
             })
             .catch(err => {
                 console.log(err)
+                toast.error(err?.message)
             })
     }
 

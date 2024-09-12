@@ -27,8 +27,8 @@ const SignInPage = () => {
 
         axios.post("http://localhost:3000/auth/login", payload)
             .then(res => {
-                console.log(res.data)
                 const token = res.data.token
+
                 if (window !== undefined) {
                     localStorage.setItem('token', JSON.stringify(token))
                 }
@@ -40,6 +40,7 @@ const SignInPage = () => {
             })
             .catch(err => {
                 console.log(err)
+                toast.error(err?.message)
             })
     }
 
