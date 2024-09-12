@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -13,6 +14,8 @@ const SignUpPage = () => {
         watch,
         formState: { errors },
     } = useForm()
+
+    const router = useRouter()
 
     const onSubmit = (data) => {
         console.log(data)
@@ -29,6 +32,7 @@ const SignUpPage = () => {
 
                 if (res.data?.message) {
                     toast.success(res.data.message)
+                    router.push('/sign-in')
                 }
             })
             .catch(err => {
