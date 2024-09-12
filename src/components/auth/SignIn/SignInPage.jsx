@@ -1,8 +1,11 @@
 "use client";
 
+import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const SignInPage = () => {
     const {
@@ -12,15 +15,39 @@ const SignInPage = () => {
         formState: { errors },
     } = useForm()
 
+    const router = useRouter()
+
     const onSubmit = (data) => {
         console.log(data)
+
+        const payload = {
+            email: data.email,
+            password: data.password
+        }
+
+        axios.post("http://localhost:3000/auth/login", payload)
+            .then(res => {
+                console.log(res.data)
+                const token = res.data.token
+                if (window !== undefined) {
+                    localStorage.setItem('token', JSON.stringify(token))
+                }
+
+                if (token) {
+                    toast.success('Logged in successfully')
+                    router.push('/contacts')
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
         <div className='space-y-4'>
             <div className="title space-y-2">
                 <h3 className="font-bold">Sign In</h3>
-                <p className='text-gray-700'>Doesn’t have an account yet? <Link href={"/sign-up"} className='text-primary font-medium hover:text-accent'>Sign In</Link></p>
+                <p className='text-gray-700'>Doesn’t have an account yet? <Link href={"/sign-up"} className='text-primary font-medium hover:text-accent'>Sign Up</Link></p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="login flex flex-col space-y-4">

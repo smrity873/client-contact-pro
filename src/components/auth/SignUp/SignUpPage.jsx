@@ -1,5 +1,6 @@
 "use client";
 
+import axios from 'axios';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -14,6 +15,20 @@ const SignUpPage = () => {
 
     const onSubmit = (data) => {
         console.log(data)
+
+        const payload = {
+            username: data.username,
+            email: data.email,
+            password: data.password
+        }
+
+        axios.post("http://localhost:3000/auth/register", payload)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
