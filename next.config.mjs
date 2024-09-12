@@ -10,6 +10,7 @@ const nextConfig = {
             "localhost",
             "192.168.1.5",
             "127.0.0.1",
+            "https://i.ibb.co",
         ],
     },
 };
