@@ -35,7 +35,9 @@ export default function RootLayout({ children }) {
 
             <h2 className="text-accent font-bold text-center">CONTACT PRO</h2>
           </header>
+
           {children}
+          
         </main>
       </body>
     </html>
