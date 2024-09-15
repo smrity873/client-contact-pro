@@ -7,6 +7,7 @@ import ContactCard from '../AllContacts/ContactCard';
 
 const ContactsPage = () => {
     const [contacts, setContacts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const token = getToken();
 
@@ -19,6 +20,7 @@ const ContactsPage = () => {
             })
                 .then(res => {
                     setContacts(res.data);
+                    setLoading(false);
                 })
                 .catch(err => {
                     console.log("Error Response:", err.response?.data || err.message);
@@ -29,11 +31,21 @@ const ContactsPage = () => {
     console.log(contacts);
 
     return (
-        <div>
-            {contacts.length > 0 ? contacts.map(contact => (
-                <ContactCard key={contact.id} contact={contact} />
-            )) : "No contacts available"}
-        </div>
+        <>
+            <div className='capitalize mb-2'>
+                all contacts
+            </div>
+            
+            {
+                !loading ? (<div>
+                    {contacts.length > 0 ? contacts.map(contact => (
+                        <ContactCard key={contact.id} contact={contact} />
+                    )) : "No contacts available"}
+                </div>)
+                :
+                <p>Loading...</p>
+            }
+        </>
     );
 };
 
