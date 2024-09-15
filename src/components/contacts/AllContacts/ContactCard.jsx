@@ -19,7 +19,6 @@ const ContactCard = ({ contact }) => {
                         profile_picture_url ? <Image src={profile_picture_url} alt={NAME} className="w-full h-full rounded-full object-cover" />
                             : <span className="text-primary text-2xl font-bold">{NAME[0]}</span>
                     }
-
                 </div>
 
                 <div className="details">
