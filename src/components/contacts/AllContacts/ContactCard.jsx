@@ -12,8 +12,8 @@ const ContactCard = ({ contact }) => {
     };
 
     return (
-        <div className="border-primary border mb-2 rounded-md px-4 py-1 flex justify-between items-center">
-            <Link href={`/contacts/${id}`} className="flex gap-4 items-center">
+        <div className="border-primary border mb-2 rounded-md px-2 py-1 flex justify-between items-center">
+            <Link href={`/contacts/${id}`} className="flex gap-2 items-center">
                 <div className="user border border-primary w-10 h-10 aspect-square rounded-full flex justify-center items-center">
                     {
                         profile_picture_url ? <Image src={profile_picture_url} alt={NAME} className="w-full h-full rounded-full object-cover" />
@@ -28,11 +28,11 @@ const ContactCard = ({ contact }) => {
             </Link>
 
             <div className="buttons flex">
-                <Link href={`/contacts/update/${id}`} className="hover:bg-primary text-primary hover:text-white p-2 rounded-md flex justify-center items-center">
+                <Link href={`/contacts/update/${id}`} className="hover:bg-primary text-primary hover:text-white p-1 rounded-md flex justify-center items-center">
                     <FaRegEdit />
                 </Link>
 
-                <button onClick={handleDelete} className="hover:bg-warning text-warning hover:text-white p-2 rounded-md flex justify-center items-center">
+                <button onClick={handleDelete} className="hover:bg-warning text-warning hover:text-white p-1 rounded-md flex justify-center items-center">
                     <AiOutlineDelete />
                 </button>
             </div>
