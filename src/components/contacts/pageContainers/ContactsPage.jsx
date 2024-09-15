@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getToken } from '@/constants/constants';
+import ContactCard from '../AllContacts/ContactCard';
 
 const ContactsPage = () => {
     const [contacts, setContacts] = useState([]);
@@ -30,9 +31,7 @@ const ContactsPage = () => {
     return (
         <div>
             {contacts.length > 0 ? contacts.map(contact => (
-                <div key={contact.id}>
-                    {contact.name} - {contact.phone}
-                </div>
+                <ContactCard key={contact.id} contact={contact} />
             )) : "No contacts available"}
         </div>
     );
