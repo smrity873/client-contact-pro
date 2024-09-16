@@ -1,6 +1,6 @@
 "use client";
 
-import { token } from '@/constants/constants';
+import { baseUrl, token } from '@/constants/constants';
 import useImgBBUpload from '@/hooks/useImgBbUpload';
 import axios from 'axios';
 import Image from 'next/image';
@@ -49,7 +49,7 @@ const AddContactPage = () => {
             profile_picture_url: image,
         };
 
-        axios.post("http://localhost:3000/contacts", payload, {
+        axios.post(`${baseUrl}/contacts`, payload, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }

@@ -1,5 +1,6 @@
 "use client";
 
+import { baseUrl } from '@/constants/constants';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -25,7 +26,7 @@ const SignInPage = () => {
             password: data.password
         }
 
-        axios.post("http://localhost:3000/auth/login", payload)
+        axios.post(`${baseUrl}/auth/login`, payload)
             .then(res => {
                 const token = res.data.token
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { baseUrl } from '@/constants/constants';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -26,7 +27,7 @@ const SignUpPage = () => {
             password: data.password
         }
 
-        axios.post("http://localhost:3000/auth/register", payload)
+        axios.post(`${baseUrl}/auth/register`, payload)
             .then(res => {
                 console.log(res.data)
 

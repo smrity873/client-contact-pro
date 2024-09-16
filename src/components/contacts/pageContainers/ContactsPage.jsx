@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getToken } from '@/constants/constants';
+import { baseUrl, getToken } from '@/constants/constants';
 import ContactCard from '../AllContacts/ContactCard';
 
 const ContactsPage = () => {
@@ -13,7 +13,7 @@ const ContactsPage = () => {
 
     useEffect(() => {
         if (token) {
-            axios.get("http://localhost:3000/contacts", {
+            axios.get(`${baseUrl}/contacts`, {
                 headers: {
                     Authorization: `Bearer ${token}`  // Ensure correct format without extra quotes
                 }

@@ -1,4 +1,4 @@
-import { token } from '@/constants/constants';
+import { baseUrl, token } from '@/constants/constants';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -8,7 +8,7 @@ const useUserProfile = () => {
 
     useEffect(() => {
         // Fetch user profile data
-        axios.get("http://localhost:3000/auth/profile", {
+        axios.get(`${baseUrl}/auth/profile`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
