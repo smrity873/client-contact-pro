@@ -2,11 +2,13 @@
 
 import { useState, useCallback } from 'react';
 import axios from 'axios';
+import { imgbbApiKey } from '@/constants/constants';
 
-const useImgBBUpload = (apiKey) => {
+const useImgBBUpload = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
+    const apiKey = imgbbApiKey;
 
     const uploadImage = useCallback(async (imageFile) => {
         setLoading(true);

@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
 
           <footer className="w-fit mx-auto py-4">
             <Link href={"/contacts/add"} className=''>
-              <FaPlusCircle className="text-3xl text-primary hover:text-accent" />
+              <FaPlusCircle className="text-3xl hover:text-4xl text-primary hover:text-accent" />
             </Link>
           </footer>
         </main>
