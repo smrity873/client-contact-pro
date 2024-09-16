@@ -35,10 +35,11 @@ export default function RootLayout({ children }) {
             </header>
 
             {children}
+
           </div>
 
-          <footer className="w-fit mx-auto py-4">
-            <Link href={"/contacts/add"} className=''>
+          <footer className="max-w-96 mx-auto py-4 fixed bottom-0 left-1/2 right-1/2">
+            <Link href={"/contacts/add"}>
               <FaPlusCircle className="text-3xl hover:text-4xl text-primary hover:text-accent" />
             </Link>
           </footer>

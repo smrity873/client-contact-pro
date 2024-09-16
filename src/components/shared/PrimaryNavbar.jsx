@@ -11,7 +11,7 @@ const PrimaryNavbar = () => {
     const { userProfile, loading } = useUserProfile();
 
     return (
-        <>
+        <div className='fixed left-0 right-0 max-w-96 mx-auto px-4 bg-colorBg border-primary border-b'>
             <div className='flex justify-between items-center'>
                 <Link href={"/contacts"}>
                     <div className="logo flex flex-col items-center space-y-1 py-2">
@@ -32,9 +32,7 @@ const PrimaryNavbar = () => {
                     </div>
                 </Link>
             </div>
-
-            <hr className='border-primary my-1 pb-1' />
-        </>
+        </div>
     );
 };
 

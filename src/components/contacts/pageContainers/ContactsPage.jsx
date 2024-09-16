@@ -29,14 +29,14 @@ const ContactsPage = () => {
     }, [token]);
 
     return (
-        <div className='flex flex-col'>
-            <div className='flex-1' style={{ overflowY: "auto" }}>
+        <div className='flex flex-col mt-10'>
+            <div className='flex-1'>
                 <div className='capitalize mb-2'>
                     all contacts
                 </div>
 
                 {
-                    !loading ? (<div style={{ overflowY: "auto" }}>
+                    !loading ? (<div>
                         {contacts.length > 0 ? contacts.map(contact => (
                             <ContactCard key={contact.id} contact={contact} />
                         )) : "No contacts available"}
