@@ -16,7 +16,7 @@ const ContactCard = ({ contact }) => {
             <Link href={`/contacts/${id}`} className="flex gap-2 items-center">
                 <div className="user border border-primary w-10 h-10 aspect-square rounded-full flex justify-center items-center">
                     {
-                        profile_picture_url ? <Image src={profile_picture_url} alt={NAME} className="w-full h-full rounded-full object-cover" />
+                        profile_picture_url ? <Image src={profile_picture_url} width={40} height={40} alt={NAME} className="w-full h-full rounded-full object-cover" />
                             : <span className="text-primary text-2xl font-bold">{NAME[0]}</span>
                     }
                 </div>
