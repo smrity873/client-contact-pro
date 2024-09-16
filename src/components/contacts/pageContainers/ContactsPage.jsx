@@ -30,13 +30,13 @@ const ContactsPage = () => {
 
     return (
         <div className='flex flex-col'>
-            <div className='flex-1'>
+            <div className='flex-1' style={{ overflowY: "auto" }}>
                 <div className='capitalize mb-2'>
                     all contacts
                 </div>
 
                 {
-                    !loading ? (<div>
+                    !loading ? (<div style={{ overflowY: "auto" }}>
                         {contacts.length > 0 ? contacts.map(contact => (
                             <ContactCard key={contact.id} contact={contact} />
                         )) : "No contacts available"}

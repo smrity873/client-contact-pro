@@ -26,8 +26,6 @@ const useUserProfile = () => {
         return <div>Loading...</div>;
     }
 
-    console.log(userProfile);
-
     return { userProfile, loading };
 };
 
