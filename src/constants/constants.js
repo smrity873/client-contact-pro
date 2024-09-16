@@ -11,3 +11,5 @@ export const getToken = () => {
         return parsedToken;
     }
 }
+
+export const token = getToken();

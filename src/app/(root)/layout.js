@@ -2,6 +2,8 @@ import localFont from "next/font/local";
 import "../globals.css";
 import { Toaster } from "react-hot-toast";
 import PrimaryNavbar from "@/components/shared/PrimaryNavbar";
+import Link from "next/link";
+import { FaPlusCircle } from "react-icons/fa";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -26,13 +28,20 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-96 mx-auto`}
       >
-        <main className="bg-colorBg px-4 min-h-screen">
-          <header>
-            <PrimaryNavbar />
-          </header>
+        <main className="bg-colorBg px-4 min-h-screen flex flex-col">
+          <div className="flex-1">
+            <header>
+              <PrimaryNavbar />
+            </header>
 
-          {children}
+            {children}
+          </div>
 
+          <footer className="w-fit mx-auto py-4">
+            <Link href={"/contacts/add"} className=''>
+              <FaPlusCircle className="text-3xl text-primary hover:text-accent" />
+            </Link>
+          </footer>
         </main>
 
         <Toaster

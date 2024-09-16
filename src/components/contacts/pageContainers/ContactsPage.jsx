@@ -28,24 +28,24 @@ const ContactsPage = () => {
         }
     }, [token]);
 
-    console.log(contacts);
-
     return (
-        <>
-            <div className='capitalize mb-2'>
-                all contacts
+        <div className='flex flex-col'>
+            <div className='flex-1'>
+                <div className='capitalize mb-2'>
+                    all contacts
+                </div>
+
+                {
+                    !loading ? (<div>
+                        {contacts.length > 0 ? contacts.map(contact => (
+                            <ContactCard key={contact.id} contact={contact} />
+                        )) : "No contacts available"}
+                    </div>)
+                        :
+                        <p>Loading...</p>
+                }
             </div>
-            
-            {
-                !loading ? (<div>
-                    {contacts.length > 0 ? contacts.map(contact => (
-                        <ContactCard key={contact.id} contact={contact} />
-                    )) : "No contacts available"}
-                </div>)
-                :
-                <p>Loading...</p>
-            }
-        </>
+        </div>
     );
 };
 
