@@ -1,10 +1,9 @@
+import UpdateContactPage from '@/components/contacts/pageContainers/UpdateContactPage';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            update contact
-        </div>
+        <UpdateContactPage />
     );
 };
 

@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
 
           </div>
 
-          <footer className="max-w-96 mx-auto py-4 fixed bottom-0 left-1/2 right-1/2">
+          <footer className="max-w-96 mx-auto py-4 fixed bottom-0 left-1/2 ml-[-10px] right-1/2">
             <Link href={"/contacts/add"}>
               <FaPlusCircle className="text-3xl hover:text-4xl text-primary hover:text-accent" />
             </Link>

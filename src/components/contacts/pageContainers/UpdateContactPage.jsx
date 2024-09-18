@@ -2,9 +2,11 @@
 
 import { baseUrl, token } from '@/constants/constants';
 import useImgBBUpload from '@/hooks/useImgBbUpload';
+import useSingleContact from '@/hooks/useSingleContact';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -12,10 +14,17 @@ import { FaUserCircle } from 'react-icons/fa';
 import { IoIosSave } from "react-icons/io";
 import { MdCancelPresentation } from "react-icons/md";
 
-const AddContactPage = () => {
+const UpdateContactPage = () => {
     const [imageFile, setImageFile] = useState(null);  // Store the file
-    const [imagePreview, setImagePreview] = useState(null);  // Store image preview URL
+
+    const { id } = useParams();
+    const { contact } = useSingleContact({ id });
+    const { NAME, address, phone, id: contactId, profile_picture_url, email } = contact;
+
+    const [imagePreview, setImagePreview] = useState(profile_picture_url);  // Store image preview URL
+
     const [uploadedImageUrl, setUploadedImageUrl] = useState("");  // Store uploaded image URL
+
 
     const {
         register,
@@ -37,8 +46,8 @@ const AddContactPage = () => {
     };
 
     const onSubmit = (data) => {
-        console.log(data, "image url: ", uploadedImageUrl);
-        const image = uploadedImageUrl || imageUrl;
+        const image = uploadedImageUrl || imageUrl || profile_picture_url;  // Use the uploaded image URL or the existing image URL
+
         const { name, phone, email, address } = data;
 
         const payload = {
@@ -49,8 +58,9 @@ const AddContactPage = () => {
             profile_picture_url: image,
         };
 
-        axios.post(`${baseUrl}/contacts`, payload, {
+        axios.put(`${baseUrl}/contacts/${contactId}`, payload, {
             headers: {
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             }
         })
@@ -58,7 +68,6 @@ const AddContactPage = () => {
                 console.log(res);
                 if (res?.data?.message) {
                     toast.success(res.data.message);
-                    handleClearForm();
                 }
             })
             .catch(err => {
@@ -86,19 +95,33 @@ const AddContactPage = () => {
         }
     }, [imageFile, uploadImage, imageUrl]);
 
+    // Set the form values
+    useEffect(() => {
+        setValue("name", NAME);
+        setValue("phone", phone);
+        setValue("email", email);
+        setValue("address", address);
+    }, [NAME, address, phone, setValue, email]);
+
     return (
         <div className='space-y-4 mt-16'>
-            <h2 className='capitalize font-medium'>Add Contact</h2>
+            <h2 className='capitalize font-medium'>Update Contact</h2>
 
             <div className="image border border-primary w-20 h-20 aspect-square rounded-full mx-auto flex flex-col justify-center items-center">
                 {/* Conditional rendering for the image preview */}
-                {imagePreview && !loading ? (
-                    <Image src={imagePreview} alt={"user-dp-preview"} width={80} height={80} className="rounded-full aspect-square" />
-                ) : imageUrl && !loading ? (
-                    <Image src={imageUrl} alt={"user-dp"} width={80} height={80} className="rounded-full aspect-square" />
-                ) : (
-                    <FaUserCircle className='text-7xl text-primary' />
-                )}
+                {
+                    imagePreview && !loading ? (
+                        <Image src={imagePreview} alt={"user-dp-preview"} width={80} height={80} className="rounded-full aspect-square" />
+                    )
+                        :
+                        imageUrl && !loading ? (
+                            <Image src={imageUrl} alt={"user-dp"} width={80} height={80} className="rounded-full aspect-square" />
+                        )
+                            :
+                            (
+                                <FaUserCircle className='text-7xl text-primary' />
+                            )
+                }
 
                 {loading && <p>Uploading...</p>}
             </div>
@@ -114,36 +137,48 @@ const AddContactPage = () => {
                     />
                 </label>
 
-                <input
-                    placeholder='Name'
-                    type='text'
-                    {...register("name", { required: true })}
-                    className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
-                />
+                <label>
+                    Name:
+                    <input
+                        placeholder='Name'
+                        type='text'
+                        {...register("name", { required: true })}
+                        className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
+                    />
+                </label>
                 {errors.name && <span>This field is required</span>}
 
-                <input
-                    placeholder='Phone'
-                    type='number'
-                    {...register("phone", { required: true })}
-                    className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
-                />
+                <label>
+                    Phone:
+                    <input
+                        placeholder='Phone'
+                        type='number'
+                        {...register("phone", { required: true })}
+                        className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
+                    />
+                </label>
                 {errors.phone && <span>This field is required</span>}
 
-                <input
-                    placeholder='Email'
-                    type='email'
-                    {...register("email", { required: true })}
-                    className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
-                />
+                <label>
+                    Email:
+                    <input
+                        placeholder='Email'
+                        type='email'
+                        {...register("email", { required: true })}
+                        className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
+                    />
+                </label>
                 {errors.email && <span>This field is required</span>}
 
-                <input
-                    placeholder='Address (Optional)'
-                    type='text'
-                    {...register("address")}
-                    className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
-                />
+                <label>
+                    Address:
+                    <input
+                        placeholder='Address (Optional)'
+                        type='text'
+                        {...register("address")}
+                        className='bg-[#D9D9D9] px-4 py-2 rounded-md outline-none w-full'
+                    />
+                </label>
 
                 <div className='flex items-center justify-around'>
                     <button className="save btn text-4xl text-primary hover:text-accent">
@@ -159,4 +194,4 @@ const AddContactPage = () => {
     );
 };
 
-export default AddContactPage;
+export default UpdateContactPage;

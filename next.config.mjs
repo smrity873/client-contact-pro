@@ -7,10 +7,11 @@ const nextConfig = {
     reactStrictMode: false,
     images: {
         domains: [
+            "i.ibb.co.com",
             "localhost",
             "192.168.1.5",
             "127.0.0.1",
-            "i.ibb.co"
+            "i.ibb.co",
         ],
     },
 };
