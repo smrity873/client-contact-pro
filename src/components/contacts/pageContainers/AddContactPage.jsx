@@ -37,7 +37,6 @@ const AddContactPage = () => {
     };
 
     const onSubmit = (data) => {
-        console.log(data, "image url: ", uploadedImageUrl);
         const image = uploadedImageUrl || imageUrl;
         const { name, phone, email, address } = data;
 
@@ -55,7 +54,6 @@ const AddContactPage = () => {
             }
         })
             .then(res => {
-                console.log(res);
                 if (res?.data?.message) {
                     toast.success(res.data.message);
                     handleClearForm();
