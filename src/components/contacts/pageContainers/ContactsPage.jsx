@@ -60,6 +60,14 @@ const ContactsPage = () => {
         }
     }, [refetch, searchInput]);
 
+    if (loading) {
+        return <p className='flex min-h-screen justify-center items-center'>Loading...</p>
+    }
+
+    if (!loading && contacts.length === 0) {
+        return <p className='flex min-h-screen justify-center items-center'>No contacts available</p>
+    }
+
     return (
         <>
             {/* search box */}
@@ -96,16 +104,11 @@ const ContactsPage = () => {
                                 </div>
 
                                 {/* contact cards */}
+
                                 {
-                                    !loading ? (
-                                        <>
-                                            {contacts.length > 0 ? contacts.map(contact => (
-                                                <ContactCard key={contact.id} contact={contact} refetch={setRefetch} />
-                                            )) : "No contacts available"}
-                                        </>
-                                    ) : (
-                                        <p>Loading...</p>
-                                    )
+                                    contacts.length > 0 && contacts.map(contact => (
+                                        <ContactCard key={contact.id} contact={contact} refetch={setRefetch} />
+                                    ))
                                 }
                             </>
                         )
