@@ -1,10 +1,12 @@
 import UpdateContactPage from '@/components/contacts/pageContainers/UpdateContactPage';
+import PrivateRoute from '@/components/shared/PrivateRoute';
 import React from 'react';
 
 const page = () => {
     return (
-        <UpdateContactPage />
-    );
+        <PrivateRoute>
+            <UpdateContactPage />
+        </PrivateRoute>);
 };
 
 export default page;

@@ -1,10 +1,12 @@
+import ContactDetailsPage from '@/components/contacts/pageContainers/ContactDetailsPage';
+import PrivateRoute from '@/components/shared/PrivateRoute';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            single contact  
-        </div>
+        <PrivateRoute>
+            <ContactDetailsPage />
+        </PrivateRoute>
     );
 };
 

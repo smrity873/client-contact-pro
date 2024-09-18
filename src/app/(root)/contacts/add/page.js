@@ -1,11 +1,12 @@
 import AddContactPage from '@/components/contacts/pageContainers/AddContactPage';
+import PrivateRoute from '@/components/shared/PrivateRoute';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
+        <PrivateRoute>
             <AddContactPage />
-        </div>
+        </PrivateRoute>
     );
 };
 
