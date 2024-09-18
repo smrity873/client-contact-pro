@@ -6,9 +6,19 @@ import { FaTruckLoading, FaUserCircle } from "react-icons/fa";
 import Link from 'next/link';
 import useUserProfile from '@/hooks/useUserProfile';
 import Image from 'next/image';
+import DropdownLogout from '../Buttons/DropdownLogout';
+import { useRouter } from 'next/navigation';
 
 const PrimaryNavbar = () => {
     const { userProfile, loading } = useUserProfile();
+    const router = useRouter();
+
+    const handleLogout = () => {
+        if(window !== undefined) {
+            localStorage.removeItem('token');
+            router.push('/sign-in');
+        }
+    }
 
     return (
         <div className='fixed left-0 right-0 max-w-96 mx-auto px-4 bg-colorBg border-primary border-b'>
@@ -20,17 +30,23 @@ const PrimaryNavbar = () => {
                     </div>
                 </Link>
 
-                <Link href={"/profile"}>
-                    <div className="user flex flex-col items-center space-y-1">
-                        {
-                            !userProfile?.profile_picture_url && !loading ? (<FaUserCircle className='text-4xl text-primary' />)
-                                :
-                                (<Image src={userProfile?.profile_picture_url} width={40} height={40} alt='dp' className='aspect-square rounded-full border border-primary' />)
-                        }
+                <div className='flex items-center'>
+                    <Link href={"/profile"}>
+                        <div className="user flex flex-col items-center space-y-1">
+                            {
+                                !userProfile?.profile_picture_url && !loading ? (<FaUserCircle className='text-4xl text-primary' />)
+                                    :
+                                    (<Image src={userProfile?.profile_picture_url} width={40} height={40} alt='dp' className='aspect-square rounded-full border border-primary' />)
+                            }
 
-                        {/* <h3 className='font-bold text-sm uppercase text-accent'>User Name</h3> */}
+                            {/* <h3 className='font-bold text-sm uppercase text-accent'>User Name</h3> */}
+                        </div>
+                    </Link>
+
+                    <div className="logout">
+                        <DropdownLogout onLogout={handleLogout} />
                     </div>
-                </Link>
+                </div>
             </div>
         </div>
     );
