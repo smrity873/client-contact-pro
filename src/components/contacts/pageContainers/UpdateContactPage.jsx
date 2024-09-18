@@ -18,7 +18,7 @@ const UpdateContactPage = () => {
     const [imageFile, setImageFile] = useState(null);  // Store the file
 
     const { id } = useParams();
-    const { contact } = useSingleContact({ id });
+    const { contact, isLoading } = useSingleContact({ id });
     const { NAME, address, phone, id: contactId, profile_picture_url, email } = contact;
 
     const [imagePreview, setImagePreview] = useState(profile_picture_url);  // Store image preview URL
@@ -104,6 +104,10 @@ const UpdateContactPage = () => {
         setValue("email", email);
         setValue("address", address);
     }, [NAME, address, phone, setValue, email, profile_picture_url, imagePreview]);
+
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div className='space-y-4 mt-16'>
