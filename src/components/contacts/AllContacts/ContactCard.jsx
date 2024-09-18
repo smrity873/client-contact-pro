@@ -51,14 +51,19 @@ const ContactCard = ({ contact, refetch }) => {
                             icon: "error"
                         });
                     });
-
+            } else {
+                Swal.fire({
+                    title: "Cancelled!",
+                    text: "Your contact is safe.",
+                    icon: "info"
+                });
             }
         });
     };
 
     return (
         <div className="border-primary border mb-2 rounded-md px-2 py-1 flex justify-between items-center">
-            <Link href={`/contacts/${id}`} className="flex gap-2 items-center">
+            <Link href={`/contacts/${id}`} className="flex flex-1 gap-2 items-center">
                 <div className="user border border-primary w-10 h-10 aspect-square rounded-full flex justify-center items-center">
                     {
                         profile_picture_url ? <Image src={profile_picture_url} width={40} height={40} alt={NAME} className="w-full h-full rounded-full object-cover" />

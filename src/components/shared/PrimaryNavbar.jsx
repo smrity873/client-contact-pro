@@ -8,13 +8,14 @@ import useUserProfile from '@/hooks/useUserProfile';
 import Image from 'next/image';
 import DropdownLogout from '../Buttons/DropdownLogout';
 import { useRouter } from 'next/navigation';
+import { RxCaretLeft } from 'react-icons/rx';
 
 const PrimaryNavbar = () => {
     const { userProfile, loading } = useUserProfile();
     const router = useRouter();
 
     const handleLogout = () => {
-        if(window !== undefined) {
+        if (window !== undefined) {
             localStorage.removeItem('token');
             router.push('/sign-in');
         }
@@ -22,13 +23,19 @@ const PrimaryNavbar = () => {
 
     return (
         <div className='fixed left-0 right-0 max-w-96 mx-auto px-4 bg-colorBg border-primary border-b'>
-            <div className='flex justify-between items-center'>
-                <Link href={"/contacts"}>
-                    <div className="logo flex flex-col items-center space-y-1 py-2">
-                        <SmallLogo />
-                        {/* <h2 className='text-sm text-accent font-bold'>CONTACT PRO</h2> */}
-                    </div>
-                </Link>
+            <div className='flex justify-between items-center py-2'>
+                <div className='flex items-center'>
+                    <Link href={"/contacts"}>
+                        <RxCaretLeft className='text-xl text-accent hover:text-primary' />
+                    </Link>
+
+                    <Link href={"/contacts"}>
+                        <div className="logo">
+                            <SmallLogo />
+                            {/* <h2 className='text-sm text-accent font-bold'>CONTACT PRO</h2> */}
+                        </div>
+                    </Link>
+                </div>
 
                 <div className='flex items-center'>
                     <Link href={"/profile"}>
