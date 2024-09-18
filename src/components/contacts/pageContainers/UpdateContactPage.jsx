@@ -25,7 +25,6 @@ const UpdateContactPage = () => {
 
     const [uploadedImageUrl, setUploadedImageUrl] = useState("");  // Store uploaded image URL
 
-
     const {
         register,
         handleSubmit,
@@ -65,7 +64,6 @@ const UpdateContactPage = () => {
             }
         })
             .then(res => {
-                console.log(res);
                 if (res?.data?.message) {
                     toast.success(res.data.message);
                 }
@@ -97,11 +95,15 @@ const UpdateContactPage = () => {
 
     // Set the form values
     useEffect(() => {
+        if (!imagePreview && profile_picture_url) {
+            setImagePreview(profile_picture_url);
+        }
+
         setValue("name", NAME);
         setValue("phone", phone);
         setValue("email", email);
         setValue("address", address);
-    }, [NAME, address, phone, setValue, email]);
+    }, [NAME, address, phone, setValue, email, profile_picture_url, imagePreview]);
 
     return (
         <div className='space-y-4 mt-16'>
