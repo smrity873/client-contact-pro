@@ -1,10 +1,13 @@
+import PrivateRoute from '@/components/shared/PrivateRoute';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            profile
-        </div>
+        <PrivateRoute>
+            <div>
+                profile
+            </div>
+        </PrivateRoute>
     );
 };
 
