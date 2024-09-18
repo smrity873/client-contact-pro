@@ -8,6 +8,7 @@ import ContactCard from '../AllContacts/ContactCard';
 const ContactsPage = () => {
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [refetch, setRefetch] = useState(false);
 
     const token = getToken();
 
@@ -26,7 +27,7 @@ const ContactsPage = () => {
                     console.log("Error Response:", err.response?.data || err.message);
                 });
         }
-    }, [token]);
+    }, [token, refetch]);
 
     return (
         <div className='flex flex-col mt-10'>
@@ -38,7 +39,7 @@ const ContactsPage = () => {
                 {
                     !loading ? (<div>
                         {contacts.length > 0 ? contacts.map(contact => (
-                            <ContactCard key={contact.id} contact={contact} />
+                            <ContactCard key={contact.id} contact={contact} refetch={setRefetch} />
                         )) : "No contacts available"}
                     </div>)
                         :

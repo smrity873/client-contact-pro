@@ -2,13 +2,58 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaRegEdit } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { baseUrl, token } from "@/constants/constants";
 
-const ContactCard = ({ contact }) => {
+const ContactCard = ({ contact, refetch }) => {
 
     const { NAME, phone, id, profile_picture_url } = contact;
 
     const handleDelete = () => {
         console.log("Delete contact with id:", id);
+        Swal.fire({
+            title: "Are you sure? Want to delete this contact?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#114084",
+            cancelButtonColor: "#CE0000",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                // Delete the contact
+                axios.delete(`${baseUrl}/contacts/${id}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                    .then((response) => {
+                        if (response?.data?.message) {
+                            
+                            refetch(true);
+
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your contact has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+
+                    .catch((error) => {
+                        console.error("Error deleting contact:", error);
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Error deleting contact.",
+                            icon: "error"
+                        });
+                    });
+
+            }
+        });
     };
 
     return (
