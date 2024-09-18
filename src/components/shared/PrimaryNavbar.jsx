@@ -26,7 +26,7 @@ const PrimaryNavbar = () => {
     }
 
     return (
-        <div className='fixed left-0 right-0 max-w-96 mx-auto px-4 bg-colorBg border-primary border-b'>
+        <div className='fixed z-30 left-0 right-0 max-w-96 mx-auto px-4 bg-colorBg border-primary border-b'>
             <div className='flex justify-between items-center py-2'>
                 <div className='flex items-center'>
                     <button onClick={handlePreviousPage}>

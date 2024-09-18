@@ -61,61 +61,58 @@ const ContactsPage = () => {
     }, [refetch, searchInput]);
 
     return (
-        <div className='flex flex-col mt-16'>
-            <div className='flex-1'>
-                {/* search box */}
-                <div className='capitalize my-1'>
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        {...register("search")}
-                        className="p-2 border rounded-md w-full"
-                    />
+        <>
+            {/* search box */}
+            <div className='fixed z-20 top-14 max-w-full min-w-[353px] bg-colorBg py-1'>
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    {...register("search")}
+                    className="py-2 px-4 border border-primary bg-transparent text-black placeholder:text-black rounded-md w-full my-1 outline-none"
+                />
+            </div>
 
+            <div className='flex flex-col mt-28 min-h-screen'>
+                <div className='flex-1'>
                     {
                         searchResults.length > 0 && (
                             <>
                                 <h1 className="capitalize font-medium">Search Results</h1>
 
-                                <div>
-                                    {searchResults.map((result) => (
-                                        <ContactCard key={result.id} contact={result} refetch={setRefetch} />
-                                    ))}
+                                {searchResults.map((result) => (
+                                    <ContactCard key={result.id} contact={result} refetch={setRefetch} />
+                                ))}
+                            </>
+                        )
+                    }
 
-                                    {searchResults.length === 0 && !loading && lock && (
-                                        <p>No results found</p>
-                                    )}
+
+                    {
+                        !searchResults.length > 0 && (
+                            <>
+                                {/* title of page */}
+                                <div>
+                                    <h1 className="capitalize font-medium">All Contacts</h1>
                                 </div>
+
+                                {/* contact cards */}
+                                {
+                                    !loading ? (
+                                        <>
+                                            {contacts.length > 0 ? contacts.map(contact => (
+                                                <ContactCard key={contact.id} contact={contact} refetch={setRefetch} />
+                                            )) : "No contacts available"}
+                                        </>
+                                    ) : (
+                                        <p>Loading...</p>
+                                    )
+                                }
                             </>
                         )
                     }
                 </div>
-
-                {
-                    !searchResults.length > 0 && (
-                        <>
-                            {/* title of page */}
-                            <div className="all">
-                                <h1 className="capitalize font-medium">All Contacts</h1>
-                            </div>
-
-                            {/* contact cards */}
-                            {
-                                !loading ? (
-                                    <div>
-                                        {contacts.length > 0 ? contacts.map(contact => (
-                                            <ContactCard key={contact.id} contact={contact} refetch={setRefetch} />
-                                        )) : "No contacts available"}
-                                    </div>
-                                ) : (
-                                    <p>Loading...</p>
-                                )
-                            }
-                        </>
-                    )
-                }
             </div>
-        </div>
+        </>
     );
 };
 
