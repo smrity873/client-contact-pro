@@ -21,13 +21,17 @@ const PrimaryNavbar = () => {
         }
     }
 
+    const handlePreviousPage = () => {
+        router.back();
+    }
+
     return (
         <div className='fixed left-0 right-0 max-w-96 mx-auto px-4 bg-colorBg border-primary border-b'>
             <div className='flex justify-between items-center py-2'>
                 <div className='flex items-center'>
-                    <Link href={"/contacts"}>
+                    <button onClick={handlePreviousPage}>
                         <RxCaretLeft className='text-xl text-accent hover:text-primary' />
-                    </Link>
+                    </button>
 
                     <Link href={"/contacts"}>
                         <div className="logo">

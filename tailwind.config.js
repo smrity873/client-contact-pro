@@ -13,6 +13,7 @@ module.exports = {
         secondary: "#114084",
         accent: "#000062",
         warning: "#CE0000",
+        inputBg: "#5A79A5"
       },
     },
   },

@@ -11,7 +11,6 @@ const ContactCard = ({ contact, refetch }) => {
     const { NAME, phone, id, profile_picture_url } = contact;
 
     const handleDelete = () => {
-        console.log("Delete contact with id:", id);
         Swal.fire({
             title: "Are you sure? Want to delete this contact?",
             text: "You won't be able to revert this!",
