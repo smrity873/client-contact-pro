@@ -26,9 +26,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-96 mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-96 mx-auto scrollbar-hide`}
       >
-        <main className="bg-colorBg px-4 min-h-screen flex flex-col shrink-0">
+        <main className="bg-colorBg px-4 min-h-screen flex flex-col shrink-0 scrollbar-hide">
           <div className="flex-1">
             <header>
               <PrimaryNavbar />
