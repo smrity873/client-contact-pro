@@ -34,16 +34,6 @@ const UpdateContactPage = () => {
 
     const { uploadImage, loading, imageUrl } = useImgBBUpload();
 
-    const handleClearForm = () => {
-        setImageFile(null);
-        setImagePreview(null);
-        setUploadedImageUrl("");
-        setValue("name", "");
-        setValue("phone", "");
-        setValue("email", "");
-        setValue("address", "");
-    };
-
     const onSubmit = (data) => {
         const image = uploadedImageUrl || imageUrl || profile_picture_url;  // Use the uploaded image URL or the existing image URL
 

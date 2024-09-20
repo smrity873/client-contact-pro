@@ -7,8 +7,7 @@ import React from 'react';
 import { FaRegEdit } from 'react-icons/fa';
 
 const ProfilePage = () => {
-    const { userProfile, loading } = useUserProfile();          // Custom hook to get user profile data
-    // const { username, email, full_name, profile_picture_url } = userProfile;
+    const { userProfile } = useUserProfile();          // Custom hook to get user profile data
 
     return (
         <div className='mt-16'>
