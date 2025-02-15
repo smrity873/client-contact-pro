@@ -19,7 +19,7 @@ const UpdateContactPage = () => {
 
     const { id } = useParams();
     const { contact, isLoading } = useSingleContact({ id });
-    const { NAME, address, phone, id: contactId, profile_picture_url, email } = contact;
+    const { name, address, phone, id: contactId, profile_picture_url, email } = contact;
 
     const [imagePreview, setImagePreview] = useState(profile_picture_url);  // Store image preview URL
 
@@ -89,11 +89,11 @@ const UpdateContactPage = () => {
             setImagePreview(profile_picture_url);
         }
 
-        setValue("name", NAME);
+        setValue("name", name);
         setValue("phone", phone);
         setValue("email", email);
         setValue("address", address);
-    }, [NAME, address, phone, setValue, email, profile_picture_url, imagePreview]);
+    }, [name, address, phone, setValue, email, profile_picture_url, imagePreview]);
 
     if (isLoading) {
         return <p>Loading...</p>;

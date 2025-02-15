@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 const ContactDetailsPage = () => {
     const { id } = useParams();
     const { contact, isLoading } = useSingleContact({ id });
-    const { NAME, address, phone, id: contactId, profile_picture_url, email } = contact || {};
+    const { name, address, phone, id: contactId, profile_picture_url, email } = contact || {};
 
     const handleDelete = () => {
         Swal.fire({
@@ -82,7 +82,7 @@ const ContactDetailsPage = () => {
                         <Image src={profile_picture_url} alt={"profile-picture"} width={80} height={80} className="rounded-full aspect-square" />
                     ) : (
                         <span className="text-primary text-5xl font-semibold">
-                            {NAME ? NAME[0] : '?'}
+                            {name ? name[0] : '?'}
                         </span>
                     )}
                 </div>
@@ -90,7 +90,7 @@ const ContactDetailsPage = () => {
                 <div className="w-full bg-inputBg border-primary h-10 flex flex-col justify-center px-4 border font-bold rounded-md">
                     <p className='gap-x-2 flex items-center'>
                         <span className='border-r border-primary pr-2 w-16 text-accent'>Name</span>
-                        <span>{NAME || 'N/A'}</span>
+                        <span>{name || 'N/A'}</span>
                     </p>
                 </div>
 
