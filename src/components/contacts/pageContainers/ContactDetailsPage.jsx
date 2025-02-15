@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 const ContactDetailsPage = () => {
     const { id } = useParams();
     const { contact, isLoading } = useSingleContact({ id });
-    const { NAME, address, phone, id: contactId, profile_picture_url, email } = contact;
+    const { NAME, address, phone, id: contactId, profile_picture_url, email } = contact || {};
 
     const handleDelete = () => {
         Swal.fire({
@@ -65,38 +65,54 @@ const ContactDetailsPage = () => {
     };
 
     if (isLoading) {
-        return <div>loading...</div>
+        return <div className="mt-16 flex justify-center">Loading...</div>
+    }
+
+    if (!contact) {
+        return <div className="mt-16 flex justify-center">Contact not found</div>
     }
 
     return (
         <div className='mt-16 space-y-5'>
-            <h2 className='font-medium capitalize'> contact Details </h2>
+            <h2 className='font-medium capitalize'>Contact Details</h2>
 
             <div className="body-profile flex flex-col space-y-5">
                 <div className="profile-picture image border border-primary w-20 h-20 aspect-square rounded-full mx-auto flex flex-col justify-center items-center">
-                    {
-                        profile_picture_url && (<Image src={profile_picture_url} alt={"profile-picture"} width={80} height={80} className="rounded-full aspect-square" />)
-                    }
-
-                    {
-                        !profile_picture_url && (<span className="text-primary text-5xl font-semibold">{NAME[0]}</span>)
-                    }
+                    {profile_picture_url ? (
+                        <Image src={profile_picture_url} alt={"profile-picture"} width={80} height={80} className="rounded-full aspect-square" />
+                    ) : (
+                        <span className="text-primary text-5xl font-semibold">
+                            {NAME ? NAME[0] : '?'}
+                        </span>
+                    )}
                 </div>
 
                 <div className="w-full bg-inputBg border-primary h-10 flex flex-col justify-center px-4 border font-bold rounded-md">
-                    <p className='gap-x-2 flex items-center'><span className='border-r border-primary pr-2 w-16 text-accent'>Name</span> <span>{NAME}</span></p>
+                    <p className='gap-x-2 flex items-center'>
+                        <span className='border-r border-primary pr-2 w-16 text-accent'>Name</span>
+                        <span>{NAME || 'N/A'}</span>
+                    </p>
                 </div>
 
                 <div className="w-full bg-inputBg border-primary h-10 flex flex-col justify-center px-4 border font-bold rounded-md">
-                    <p className='gap-x-2 flex items-center'><span className='border-r border-primary pr-2 w-16 text-accent'>Phone</span> <span>{phone}</span></p>
+                    <p className='gap-x-2 flex items-center'>
+                        <span className='border-r border-primary pr-2 w-16 text-accent'>Phone</span>
+                        <span>{phone || 'N/A'}</span>
+                    </p>
                 </div>
 
                 <div className="w-full bg-inputBg border-primary h-10 flex flex-col justify-center px-4 border font-bold rounded-md">
-                    <p className='gap-x-2 flex items-center'><span className='border-r border-primary pr-2 w-16 text-accent'>Email</span> {email && (<span>{email}</span>)}</p>
+                    <p className='gap-x-2 flex items-center'>
+                        <span className='border-r border-primary pr-2 w-16 text-accent'>Email</span>
+                        <span>{email || 'N/A'}</span>
+                    </p>
                 </div>
 
                 <div className="w-full bg-inputBg border-primary h-10 flex flex-col justify-center px-4 border font-bold rounded-md">
-                    <p className='gap-x-2 flex items-center'><span className='border-r border-primary pr-2 w-16 text-accent' text-accent>Address</span> {address && (<span>{address}</span>)}</p>
+                    <p className='gap-x-2 flex items-center'>
+                        <span className='border-r border-primary pr-2 w-16 text-accent'>Address</span>
+                        <span>{address || 'N/A'}</span>
+                    </p>
                 </div>
 
                 <div className="actions-btn flex items-center justify-end">

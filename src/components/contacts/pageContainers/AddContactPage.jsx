@@ -38,19 +38,22 @@ const AddContactPage = () => {
 
     const onSubmit = (data) => {
         const image = uploadedImageUrl || imageUrl;
-        const { name, phone, email, address } = data;
+        console.log('Form data:', data); // Debug log
 
         const payload = {
-            name: name,
-            phone: phone,
-            email: email,
-            address: address,
+            name: data.name.trim(),  // Explicitly handle name field
+            phone: data.phone,
+            email: data.email,
+            address: data.address,
             profile_picture_url: image,
         };
+
+        console.log('Sending payload:', payload); // Debug log
 
         axios.post(`${baseUrl}/contacts`, payload, {
             headers: {
                 Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json', // Explicitly set content type
             }
         })
             .then(res => {

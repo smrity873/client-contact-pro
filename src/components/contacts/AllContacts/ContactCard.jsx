@@ -8,7 +8,7 @@ import { baseUrl, token } from "@/constants/constants";
 
 const ContactCard = ({ contact, refetch }) => {
 
-    const { NAME, phone, id, profile_picture_url } = contact;
+    const { name, phone, id, profile_picture_url } = contact;
 
     const handleDelete = () => {
         Swal.fire({
@@ -65,13 +65,24 @@ const ContactCard = ({ contact, refetch }) => {
             <Link href={`/contacts/${id}`} className="flex flex-1 gap-2 items-center">
                 <div className="user border border-primary w-10 h-10 aspect-square rounded-full flex justify-center items-center">
                     {
-                        profile_picture_url ? <Image src={profile_picture_url} width={40} height={40} alt={NAME} className="w-full h-full rounded-full object-cover" />
-                            : <span className="text-primary text-2xl font-bold">{NAME[0]}</span>
+                        profile_picture_url ? (
+                            <Image 
+                                src={profile_picture_url} 
+                                width={40} 
+                                height={40} 
+                                alt={name || 'Contact'} 
+                                className="w-full h-full rounded-full object-cover" 
+                            />
+                        ) : (
+                            <span className="text-primary text-2xl font-bold">
+                                {name ? name[0] : '?'}
+                            </span>
+                        )
                     }
                 </div>
 
                 <div className="details">
-                    <div className="name font-bold text-primary">{NAME}</div>
+                    <div className="name font-bold text-primary">{name}</div>
                     <div className="number font-medium text-gray-700">{phone}</div>
                 </div>
             </Link>
